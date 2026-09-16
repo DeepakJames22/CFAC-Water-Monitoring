@@ -2,32 +2,39 @@ package cfac_water_monitoring.simulations;
 
 import cfac_water_monitoring.WaterSensor;
 import cfac_water_monitoring.WaterGateway;
+import cfac_water_monitoring.PriorityScheduler;
 
 network WaterMonitoringNetwork
 {
     submodules:
-        waterLevelSensor1: WaterSensor {
-            @display("p=120,100");
+        sensor1: WaterSensor {
+            @display("p=100,100");
         }
-        waterLevelSensor2: WaterSensor {
-            @display("p=120,200");
+        sensor2: WaterSensor {
+            @display("p=100,200");
         }
-        waterLevelSensor3: WaterSensor {
-            @display("p=120,300");
+        sensor3: WaterSensor {
+            @display("p=100,300");
         }
-        pressureSensor: WaterSensor {
-            @display("p=120,400");
+        sensor4: WaterSensor {
+            @display("p=100,400");
         }
-        leakSensor: WaterSensor {
-            @display("p=120,470");
+        sensor5: WaterSensor {
+            @display("p=100,500");
+        }
+        scheduler: PriorityScheduler {
+            @display("p=350,300");
         }
         gateway: WaterGateway {
-            @display("p=500,280");
+            @display("p=600,300");
         }
+
     connections:
-        waterLevelSensor1.out --> gateway.in[0];
-        waterLevelSensor2.out --> gateway.in[1];
-        waterLevelSensor3.out --> gateway.in[2];
-        pressureSensor.out --> gateway.in[3];
-        leakSensor.out --> gateway.in[4];
+        sensor1.out --> scheduler.in;
+        sensor2.out --> scheduler.in;
+        sensor3.out --> scheduler.in;
+        sensor4.out --> scheduler.in;
+        sensor5.out --> scheduler.in;
+
+        scheduler.out --> gateway.in[0];
 }
