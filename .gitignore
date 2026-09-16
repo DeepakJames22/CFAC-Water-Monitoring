@@ -1,0 +1,13 @@
+# OMNeT++ build output
+out/
+
+# Eclipse/IDE settings
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
